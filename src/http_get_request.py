@@ -44,5 +44,7 @@ def send_http_get_request(url: str,
             "json": response.json() if response.headers.get('content-type', '').startswith('application/json') else None
         }
     
+    except requests.exceptions.HTTPError as he:
+        raise
     except requests.exceptions.RequestException as e:
         raise RuntimeError(f"HTTP GET request failed: {str(e)}")
