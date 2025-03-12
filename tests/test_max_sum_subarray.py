@@ -13,7 +13,7 @@ def test_basic_positive_array():
 
 def test_array_with_negative_numbers():
     """Test an array with both positive and negative numbers"""
-    assert find_max_sum_subarray([1, -2, 3, 10, -4, 7, 2, -5]) == 22
+    assert find_max_sum_subarray([1, -2, 3, 10, -4, 7, 2, -5]) == 18
 
 def test_all_negative_numbers():
     """Test an array with all negative numbers"""
@@ -44,4 +44,4 @@ def test_error_non_numeric_elements():
 
 def test_mixed_types_numeric():
     """Test that the function works with mixed numeric types"""
-    assert find_max_sum_subarray([1, 2.5, -3, 4, -5.5]) == 4
+    assert find_max_sum_subarray([1, 2.5, -3, 4, -5.5]) == 4.5
