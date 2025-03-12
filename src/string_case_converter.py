@@ -42,6 +42,9 @@ def to_snake_case(input_string: str) -> str:
     # This helps handle mixed punctuation and multiple separators
     cleaned_string = re.sub(r'[^a-zA-Z0-9]+', ' ', input_string)
     
+    # Collapse multiple spaces to a single space and strip leading/trailing whitespace
+    cleaned_string = re.sub(r'\s+', ' ', cleaned_string).strip()
+    
     # Insert underscore before any uppercase letters 
     # that are preceded by a lowercase letter or number
     s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', cleaned_string)
