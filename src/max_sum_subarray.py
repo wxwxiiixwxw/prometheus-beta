@@ -32,15 +32,16 @@ def find_max_sum_subarray(arr):
     if not all(isinstance(x, (int, float)) for x in arr):
         raise TypeError("All elements must be numeric")
     
-    # Kadane's algorithm
-    max_so_far = float('-inf')  # Maximum sum found so far
-    max_ending_here = 0         # Maximum sum ending at current position
+    # Kadane's algorithm with precise tracking of max subarray sum
+    max_so_far = arr[0]  # Initialize with first element 
+    max_ending_here = arr[0]
     
-    for num in arr:
-        # Update max_ending_here
+    for num in arr[1:]:
+        # Update max_ending_here to be the maximum of current number or 
+        # current number plus previous max_ending_here
         max_ending_here = max(num, max_ending_here + num)
         
-        # Update max_so_far if needed
+        # Update max_so_far if the current max_ending_here is larger
         max_so_far = max(max_so_far, max_ending_here)
     
     return max_so_far
