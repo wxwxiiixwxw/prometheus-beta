@@ -24,15 +24,16 @@ def remove_excess_duplicates(input_string):
     if not input_string:
         return input_string
     
-    # Count character occurrences
+    # Count character occurrences preserving order
+    result = []
     char_counts = {}
+    
     for char in input_string:
+        # Keep track of count for each character
         char_counts[char] = char_counts.get(char, 0) + 1
+        
+        # Only add if count is 1 or 2
+        if char_counts[char] <= 2:
+            result.append(char)
     
-    # Build result string, keeping only chars that appear 1 or 2 times
-    result = ''.join(
-        char * min(2, count) 
-        for char, count in char_counts.items()
-    )
-    
-    return result
+    return ''.join(result)
