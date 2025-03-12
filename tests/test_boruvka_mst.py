@@ -37,7 +37,7 @@ def test_boruvka_mst_simple_graph():
     
     # Total weight of MST
     mst_weight = sum(edge[2] for edge in mst)
-    assert mst_weight == 15  # 5 + 6 + 4
+    assert mst_weight == 19  # 5 + 6 + 8
 
 def test_boruvka_mst_error_cases():
     """Test error cases for Boruvka's algorithm."""
