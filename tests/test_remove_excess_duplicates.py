@@ -16,7 +16,7 @@ def test_remove_excess_duplicates_all_unique():
 
 def test_remove_excess_duplicates_multiple_duplicates():
     """Test string with multiple types of duplicates."""
-    assert remove_excess_duplicates("aabbccddeeefff") == "aabbccddee"
+    assert remove_excess_duplicates("aabbccddeeefff") == "aabbccddeeff"
 
 def test_remove_excess_duplicates_preserve_two():
     """Ensure exactly two occurrences of each character are preserved."""
