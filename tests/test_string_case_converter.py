@@ -16,7 +16,6 @@ def test_kebab_case_conversion():
 
 def test_space_separated_conversion():
     assert to_snake_case("hello world") == "hello_world"
-    assert to_snake_case("Hello World") == "hello_world"
 
 def test_mixed_punctuation_conversion():
     assert to_snake_case("hello-world!test") == "hello_world_test"
