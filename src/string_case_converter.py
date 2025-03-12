@@ -50,5 +50,5 @@ def to_snake_case(input_string: str) -> str:
     s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', cleaned_string)
     s2 = re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1)
     
-    # Convert to lowercase and replace any remaining spaces with single underscore
-    return '_'.join(re.findall(r'\w+', s2.lower()))
+    # Convert to lowercase and create snake_case
+    return '_'.join(word.lower() for word in s2.split())
