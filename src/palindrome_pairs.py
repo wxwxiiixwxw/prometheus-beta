@@ -31,7 +31,8 @@ def find_palindrome_pairs(words):
                 continue
             
             # Check if concatenating words[i] and words[j] forms a palindrome
-            if is_palindrome(words[i] + words[j]):
+            concatenated = words[i] + words[j]
+            if is_palindrome(concatenated):
                 result.append([i, j])
     
     return result
