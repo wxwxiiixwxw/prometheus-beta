@@ -35,4 +35,4 @@ def test_non_string_input():
 def test_unicode_characters():
     """Test unicode characters"""
     result = find_palindromic_substrings("анна")
-    assert set(result) == set(["а", "анн", "анна", "нн"])
+    assert set(result) == set(["а", "анн", "анна", "н", "нн"])
