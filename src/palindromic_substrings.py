@@ -8,7 +8,7 @@ def find_palindromic_substrings(s: str) -> list[str]:
         s (str): Input string to find palindromic substrings
     
     Returns:
-        list[str]: A list of all unique palindromic substrings in the input string
+        list[str]: A sorted list of all unique palindromic substrings in the input string
     
     Time Complexity: O(n^2)
     Space Complexity: O(n)
@@ -17,7 +17,7 @@ def find_palindromic_substrings(s: str) -> list[str]:
         >>> find_palindromic_substrings("aaa")
         ['a', 'aa', 'aaa']
         >>> find_palindromic_substrings("abba")
-        ['a', 'b', 'bb', 'abba']
+        ['a', 'ab', 'abba', 'b', 'bb']
     """
     # Handle edge cases
     if not s or not isinstance(s, str):
@@ -42,4 +42,4 @@ def find_palindromic_substrings(s: str) -> list[str]:
             left -= 1
             right += 1
     
-    return list(palindromes)
+    return sorted(palindromes)
