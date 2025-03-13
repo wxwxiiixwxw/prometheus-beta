@@ -17,31 +17,45 @@ def reorder_list_with_small_diff(nums):
     if not nums:
         return []
     
+    if len(nums) == 1:
+        return nums
+    
+    # Count occurrences to handle duplicates
+    from collections import Counter
+    num_counts = Counter(nums)
+    
     # Sort the input list to help with reordering
-    sorted_nums = sorted(nums)
+    sorted_nums = sorted(set(nums))
     
-    # Try to create a valid reordering
-    result = [sorted_nums[0]]
-    used = {sorted_nums[0]}
-    
-    def can_add(current, candidate):
-        """Check if candidate can be added to the result."""
-        diff = abs(current - candidate)
-        return diff in {0, 1} and candidate not in used
-    
-    # Try to build the list
-    while len(result) < len(nums):
-        # Find a suitable next number
-        found_next = False
-        for num in sorted_nums:
-            if can_add(result[-1], num):
-                result.append(num)
-                used.add(num)
-                found_next = True
-                break
+    def backtrack(current_result, remaining):
+        """Recursive backtracking to find a valid reordering."""
+        # Success condition
+        if not remaining:
+            return current_result
         
-        # If no suitable number found, backtrack or return None
-        if not found_next:
-            return None
+        # Try adding the next number
+        for i, num in enumerate(remaining):
+            # If list is empty or difference is within constraints
+            if (not current_result or 
+                abs(current_result[-1] - num) <= 1):
+                
+                # Create new lists to avoid modifying originals
+                new_result = current_result + [num]
+                new_remaining = remaining[:i] + remaining[i+1:]
+                
+                # Recursive call
+                solution = backtrack(new_result, new_remaining)
+                if solution:
+                    return solution
+        
+        # No solution found
+        return None
     
-    return result if len(result) == len(nums) else None
+    # Try backtracking from multiple start points
+    for start_index, start_num in enumerate(sorted_nums):
+        result = backtrack([start_num], 
+                           sorted_nums[:start_index] + sorted_nums[start_index+1:])
+        if result and len(result) == len(nums):
+            return result
+    
+    return None
