@@ -1,12 +1,12 @@
 def sort_array_with_even_squares(arr):
     """
-    Sort an array of numbers with a special rule for even numbers.
+    Sort an array of numbers with a specific rule for even numbers.
     
     The function does the following:
-    1. Preserve the original order of even numbers 
-    2. Sort the array in ascending order
-    3. Square the original even numbers
-    4. Replace the even numbers with squared values at their original positions
+    1. Create an initial sorted copy of the input array
+    2. Identify the order of original even numbers
+    3. Square the even numbers
+    4. Carefully replace even numbers with their squared values
     
     Args:
         arr (list): Input list of numbers
@@ -25,24 +25,20 @@ def sort_array_with_even_squares(arr):
     if not arr:
         return []
     
-    # Identify the indices of original even numbers in their order of first appearance
-    even_indices = []
-    original_evens = []
-    for i, num in enumerate(arr):
-        if num % 2 == 0:
-            even_indices.append(i)
-            original_evens.append(num)
-    
-    # Sort the entire array
+    # Sort the array
     sorted_arr = sorted(arr)
     
-    # Square the original even numbers in descending order
+    # Collect even numbers in their original order
+    original_evens = [num for num in arr if num % 2 == 0]
+    
+    # Square the even numbers and sort in descending order
     squared_evens = sorted([num**2 for num in original_evens], reverse=True)
     
-    # Replace the even numbers in sorted array with their squared values
-    for i, orig_index in enumerate(even_indices):
-        # Find the index of the even number in the sorted array
-        even_pos = sorted_arr.index(original_evens[i])
-        sorted_arr[even_pos] = squared_evens[i]
+    # Track positions of even numbers in sorted array
+    even_indices = [i for i, num in enumerate(sorted_arr) if num % 2 == 0]
+    
+    # Systematically replace even numbers with squared values
+    for i, index in enumerate(even_indices):
+        sorted_arr[index] = squared_evens[i]
     
     return sorted_arr
