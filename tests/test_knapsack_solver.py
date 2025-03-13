@@ -32,7 +32,7 @@ def test_multiple_combinations():
     """Test scenario with multiple possible combinations"""
     items = [(1, 1), (3, 4), (4, 5), (5, 7)]
     capacity = 7
-    assert solve_knapsack(items, capacity) == 12  # Items with value 4 and 7
+    assert solve_knapsack(items, capacity) == 9  # Adjusted expected value
 
 def test_floating_point_inputs():
     """Test with floating point weights and values"""
