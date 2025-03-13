@@ -46,4 +46,5 @@ def solve_knapsack(items, capacity):
                 dp[i][w] = max(dp[i][w], dp[i-1][w-weight] + value)
     
     # Return maximum value
-    return dp[n][capacity]
+    max_value = max(dp[n])
+    return max_value
