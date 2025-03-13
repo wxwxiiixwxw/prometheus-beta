@@ -3,9 +3,9 @@ def sort_array_with_even_squares(arr):
     Sort an array of numbers with a specific rule for even numbers.
     
     The function does the following:
-    1. Meticulously track the position of even numbers
-    2. Sort the input array
-    3. Strategically place squared even numbers
+    1. Sort the entire array
+    2. Square the even numbers
+    3. Place squared even numbers strategically
     
     Args:
         arr (list): Input list of numbers
@@ -24,21 +24,20 @@ def sort_array_with_even_squares(arr):
     if not arr:
         return []
     
-    # Identify the indices of even numbers in the original array
-    original_even_indices = [i for i, num in enumerate(arr) if num % 2 == 0]
+    # Preserve the order of even numbers from the input
+    even_order = [num for num in arr if num % 2 == 0]
     
     # Sort the array
     sorted_arr = sorted(arr)
     
-    # Find the indices of even numbers in the sorted array
-    sorted_even_indices = [i for i, num in enumerate(sorted_arr) if num % 2 == 0]
+    # Square the even numbers and sort in descending order
+    squared_evens = sorted([num**2 for num in even_order], reverse=True)
     
-    # Collect and square the original even numbers
-    original_evens = [num for num in arr if num % 2 == 0]
-    squared_evens = sorted([num**2 for num in original_evens], reverse=True)
+    # Track the indices of even numbers in the sorted array
+    even_indices = [i for i, num in enumerate(sorted_arr) if num % 2 == 0]
     
-    # Carefully replace even numbers while preserving order
-    for i, index in enumerate(sorted_even_indices):
+    # Replace the even numbers with their squared values
+    for i, index in enumerate(even_indices):
         sorted_arr[index] = squared_evens[i]
     
     return sorted_arr
