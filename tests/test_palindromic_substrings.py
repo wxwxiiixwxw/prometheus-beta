@@ -16,7 +16,7 @@ def test_no_palindromes():
 def test_multiple_palindromes():
     """Test string with multiple palindromes"""
     result = find_palindromic_substrings("abba")
-    assert result == ["a", "ab", "abba", "b", "bb"]
+    assert result == ["a", "abba", "b", "bb"]
 
 def test_repeated_characters():
     """Test string with repeated characters"""
@@ -35,4 +35,4 @@ def test_non_string_input():
 def test_unicode_characters():
     """Test unicode characters"""
     result = find_palindromic_substrings("анна")
-    assert set(result) == set(["а", "анн", "анна", "н", "нн"])
+    assert set(result) == set(["а", "анна", "н", "нн"])
