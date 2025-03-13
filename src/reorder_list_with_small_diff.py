@@ -59,7 +59,8 @@ def reorder_list_with_small_diff(nums):
     sorting_strategies = [
         sorted(nums),  # Ascending
         sorted(nums, reverse=True),  # Descending
-        sorted(nums, key=abs)  # By absolute value
+        sorted(nums, key=abs),  # By absolute value
+        sorted(sorted(nums), key=lambda x: abs(x - nums[0]))  # Close to first element
     ]
     
     for strategy in sorting_strategies:
