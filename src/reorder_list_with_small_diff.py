@@ -10,7 +10,7 @@ def reorder_list_with_small_diff(nums):
         list or None: Reordered list where consecutive elements differ 
                       by at most 1, or None if impossible
     
-    Time complexity: O(n log n)
+    Time complexity: O(n!)  (worst case)
     Space complexity: O(n)
     """
     # Handle edge cases
@@ -20,42 +20,55 @@ def reorder_list_with_small_diff(nums):
     if len(nums) == 1:
         return nums
     
-    # Count occurrences to handle duplicates
-    from collections import Counter
-    num_counts = Counter(nums)
+    def is_valid_sequence(seq):
+        """Check if the sequence meets the small difference constraint."""
+        return all(abs(seq[i] - seq[i-1]) <= 1 for i in range(1, len(seq)))
     
-    # Sort the input list to help with reordering
-    sorted_nums = sorted(set(nums))
-    
-    def backtrack(current_result, remaining):
-        """Recursive backtracking to find a valid reordering."""
+    def backtrack(sequence, candidates):
+        """
+        Recursively find a valid permutation of nums.
+        
+        Args:
+            sequence (list): Current sequence being built
+            candidates (list): Remaining numbers to use
+        
+        Returns:
+            list or None: Valid reordered list, or None if impossible
+        """
         # Success condition
-        if not remaining:
-            return current_result
+        if not candidates:
+            return sequence
         
-        # Try adding the next number
-        for i, num in enumerate(remaining):
-            # If list is empty or difference is within constraints
-            if (not current_result or 
-                abs(current_result[-1] - num) <= 1):
+        # Try each remaining candidate
+        for i, num in enumerate(candidates):
+            # If this is the first number or it fits the constraint
+            if (not sequence or abs(sequence[-1] - num) <= 1):
+                # Make a recursive call
+                new_sequence = sequence + [num]
+                new_candidates = candidates[:i] + candidates[i+1:]
                 
-                # Create new lists to avoid modifying originals
-                new_result = current_result + [num]
-                new_remaining = remaining[:i] + remaining[i+1:]
-                
-                # Recursive call
-                solution = backtrack(new_result, new_remaining)
-                if solution:
-                    return solution
+                result = backtrack(new_sequence, new_candidates)
+                if result:
+                    return result
         
-        # No solution found
+        # No valid sequence found
         return None
     
-    # Try backtracking from multiple start points
-    for start_index, start_num in enumerate(sorted_nums):
-        result = backtrack([start_num], 
-                           sorted_nums[:start_index] + sorted_nums[start_index+1:])
-        if result and len(result) == len(nums):
-            return result
+    # Try different ordering strategies
+    # Try sorting input in different ways to maximize chances of success
+    sorting_strategies = [
+        sorted(nums),  # Ascending
+        sorted(nums, reverse=True),  # Descending
+        sorted(nums, key=abs)  # By absolute value
+    ]
+    
+    for strategy in sorting_strategies:
+        for start_index in range(len(strategy)):
+            first_num = strategy[start_index]
+            candidates = strategy[:start_index] + strategy[start_index+1:]
+            
+            result = backtrack([first_num], candidates)
+            if result and len(result) == len(nums):
+                return result
     
     return None
