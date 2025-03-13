@@ -26,6 +26,11 @@ def find_missing_numbers(arr):
     # Create a set of the input array for O(1) lookup
     arr_set = set(arr)
     
+    # Expand the range if there's only one element
+    if len(arr) == 1:
+        min_val = min_val - 2
+        max_val = max_val + 2
+    
     # Find missing numbers
     missing_numbers = [
         num for num in range(min_val, max_val + 1) 
