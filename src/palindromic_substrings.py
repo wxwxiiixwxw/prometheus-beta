@@ -42,4 +42,8 @@ def find_palindromic_substrings(s: str) -> list[str]:
             left -= 1
             right += 1
     
-    return sorted(palindromes)
+    # Single characters always become palindromes
+    for i in range(len(s)):
+        palindromes.add(s[i])
+    
+    return sorted(list(palindromes))
