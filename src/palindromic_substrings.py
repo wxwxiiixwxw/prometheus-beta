@@ -27,23 +27,11 @@ def find_palindromic_substrings(s: str) -> list[str]:
     palindromes = set()
     
     # Check all possible substrings
-    for i in range(len(s)):
-        # Odd length palindromes
-        left, right = i, i
-        while left >= 0 and right < len(s) and s[left] == s[right]:
-            palindromes.add(s[left:right+1])
-            left -= 1
-            right += 1
-        
-        # Even length palindromes
-        left, right = i, i+1
-        while left >= 0 and right < len(s) and s[left] == s[right]:
-            palindromes.add(s[left:right+1])
-            left -= 1
-            right += 1
-    
-    # Single characters always become palindromes
-    for i in range(len(s)):
-        palindromes.add(s[i])
+    for start in range(len(s)):
+        for end in range(start, len(s)):
+            # Check if substring is palindrome
+            substring = s[start:end+1]
+            if substring == substring[::-1]:
+                palindromes.add(substring)
     
     return sorted(list(palindromes))
