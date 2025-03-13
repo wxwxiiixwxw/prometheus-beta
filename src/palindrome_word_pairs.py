@@ -30,11 +30,8 @@ def find_palindrome_word_pairs(words):
             if i == j:
                 continue
             
-            # Reverse the word at index j and concatenate with word at index i
-            combined = words[i] + words[j][::-1]
-            
-            # Check if the combined word is a palindrome
-            if combined == combined[::-1]:
+            # Check if reversing the word at j can form a palindrome with the word at i
+            if words[i] == words[j][::-1]:
                 palindrome_pairs.append((i, j))
     
     return palindrome_pairs
