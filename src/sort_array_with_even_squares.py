@@ -3,11 +3,11 @@ def sort_array_with_even_squares(arr):
     Sort an array of numbers with a special rule for even numbers.
     
     The function does the following:
-    1. Find the original positions of even numbers
-    2. Sort the entire array in ascending order
-    3. Square the even numbers
+    1. Create a list of original even numbers
+    2. Sort the array in ascending order 
+    3. Square the original even numbers
     4. Sort the squared even numbers in descending order
-    5. Replace the even numbers in their original positions with the sorted squared values
+    5. Strategically replace even numbers with their squared values
     
     Args:
         arr (list): Input list of numbers
@@ -26,20 +26,26 @@ def sort_array_with_even_squares(arr):
     if not arr:
         return []
     
-    # Identify the original indices of even numbers
-    even_indices = [i for i, num in enumerate(arr) if num % 2 == 0]
-    
-    # Sort the entire array in ascending order
+    # Create a sorted copy of the array
     sorted_arr = sorted(arr)
     
-    # Extract even numbers, square them, and sort in descending order
-    even_numbers = [num for num in sorted_arr if num % 2 == 0]
-    squared_evens = sorted([num**2 for num in even_numbers], reverse=True)
+    # Identify original even numbers
+    original_evens = [num for num in arr if num % 2 == 0]
     
-    # Place the squared even numbers back in their original positions
-    for i, index in enumerate(even_indices):
-        # Find the index of the original even number in the sorted array
-        even_pos = sorted_arr.index(even_numbers[i])
-        sorted_arr[even_pos] = squared_evens[i]
+    # Square the even numbers
+    squared_evens = sorted([num**2 for num in original_evens], reverse=True)
     
-    return sorted_arr
+    # Create a new result array
+    result = []
+    even_index = 0
+    
+    for num in sorted_arr:
+        if num % 2 == 0:
+            # Replace even numbers with squared values
+            result.append(squared_evens[even_index])
+            even_index += 1
+        else:
+            # Keep odd numbers as they are
+            result.append(num)
+    
+    return result
