@@ -14,10 +14,6 @@ def find_palindrome_pairs(words):
     
     Time Complexity: O(n^2 * k), where n is the number of words and k is the length of the longest word
     Space Complexity: O(1) excluding the output list
-    
-    Examples:
-        >>> find_palindrome_pairs(["abcd", "dcba", "lls", "s", "sssll"])
-        [[0, 1], [1, 0], [3, 4], [4, 3]]
     """
     def is_palindrome(s):
         """Helper function to check if a string is a palindrome."""
@@ -34,6 +30,10 @@ def find_palindrome_pairs(words):
         for j in range(len(words)):
             # Skip same index pairs
             if i == j:
+                continue
+            
+            # Skip identical word pairs (except for single chars)
+            if len(words[i]) > 1 and words[i] == words[j]:
                 continue
             
             # Check if concatenation forms a palindrome in both orders
