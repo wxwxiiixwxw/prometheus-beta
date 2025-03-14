@@ -1,0 +1,33 @@
+import pytest
+from src.fibonacci_reverse import fibonacci_reverse
+
+def test_fibonacci_reverse_zero():
+    """Test generating 0 Fibonacci numbers."""
+    assert fibonacci_reverse(0) == []
+
+def test_fibonacci_reverse_one():
+    """Test generating 1 Fibonacci number."""
+    assert fibonacci_reverse(1) == [0]
+
+def test_fibonacci_reverse_two():
+    """Test generating 2 Fibonacci numbers."""
+    assert fibonacci_reverse(2) == [1, 0]
+
+def test_fibonacci_reverse_five():
+    """Test generating 5 Fibonacci numbers."""
+    assert fibonacci_reverse(5) == [3, 2, 1, 1, 0]
+
+def test_fibonacci_reverse_ten():
+    """Test generating 10 Fibonacci numbers."""
+    expected = [34, 21, 13, 8, 5, 3, 2, 1, 1, 0]
+    assert fibonacci_reverse(10) == expected
+
+def test_fibonacci_reverse_negative():
+    """Test that negative input raises a ValueError."""
+    with pytest.raises(ValueError, match="Input must be a non-negative integer"):
+        fibonacci_reverse(-1)
+
+def test_fibonacci_reverse_type():
+    """Test that non-integer input raises a TypeError."""
+    with pytest.raises(TypeError):
+        fibonacci_reverse("not an int")
